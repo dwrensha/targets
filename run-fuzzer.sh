@@ -5,7 +5,7 @@ set -e
 # Specify RUSTFLAGS:
 export RUSTFLAGS=""
 # - so the target crate is compiled with sanitization
-export RUSTFLAGS="$RUSTFLAGS -C passes=sancov -C llvm-args=-sanitizer-coverage-level=3 -Z sanitizer=address -C panic=abort"
+export RUSTFLAGS="$RUSTFLAGS -C passes=sancov -C llvm-args=-sanitizer-coverage-level=3 -Z sanitizer=address -C panic=unwind"
 # - optimizations
 export RUSTFLAGS="$RUSTFLAGS -C opt-level=3"
 # - and all debug infos
@@ -57,5 +57,5 @@ else
     OPTS="${@:3} $(pwd)/corpus $(pwd)/seeds"
 fi
 
-cargo run --target $TARGET --bin "$2" -- $OPTS
+cargo run --target $TARGET --bin "$2" -- -detect_leaks=0 $OPTS
 

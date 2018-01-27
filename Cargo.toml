@@ -23,6 +23,7 @@ members = [
     "quick-xml",
     "regex",
     "ring",
+    "rustc",
     # "rustfmt",
     "semver",
     "serde_json",
